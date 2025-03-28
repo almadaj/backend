@@ -19,6 +19,11 @@ public class UserController {
         return service.save(user);
     }
 
+    @PutMapping
+    public User updateUser(@RequestBody User user){
+        return service.updateUser(user);
+    }
+
     @GetMapping("/all")
     public List<User> findAll(){
         return service.findAll();
@@ -27,5 +32,11 @@ public class UserController {
     @GetMapping("/{id}")
     public User findUserById(@PathVariable Long id){
         return service.findById(id);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id){
+        service.deleteUser(id);
     }
 }

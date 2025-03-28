@@ -17,11 +17,19 @@ public class UserService {
         return repository.save(user);
     }
 
+    public User updateUser(User user){
+        return repository.save(user);
+    }
+
     public List<User> findAll(){
         return repository.findAll();
     }
 
     public User findById(Long id){
         return repository.findById(id).get();
+    }
+
+    public void deleteUser(Long id){
+        repository.deleteById(id);
     }
 }
