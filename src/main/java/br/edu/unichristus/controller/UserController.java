@@ -1,8 +1,9 @@
 package br.edu.unichristus.controller;
 
+import br.edu.unichristus.domain.dto.UserDTO;
+import br.edu.unichristus.domain.dto.UserLowDTO;
 import br.edu.unichristus.domain.model.User;
 import br.edu.unichristus.service.UserService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +16,17 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public User save(@RequestBody User user){
+    public UserLowDTO save(@RequestBody UserDTO user){
         return service.save(user);
     }
 
     @PutMapping
-    public User updateUser(@RequestBody User user){
+    public UserLowDTO updateUser(@RequestBody UserDTO user){
         return service.updateUser(user);
     }
 
     @GetMapping("/all")
-    public List<User> findAll(){
+    public List<UserLowDTO> findAll(){
         return service.findAll();
     }
 
