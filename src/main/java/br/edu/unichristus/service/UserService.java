@@ -2,12 +2,16 @@ package br.edu.unichristus.service;
 
 import br.edu.unichristus.domain.dto.UserDTO;
 import br.edu.unichristus.domain.dto.UserLowDTO;
+import br.edu.unichristus.domain.dto.UserRolesDTO;
 import br.edu.unichristus.domain.model.User;
+import br.edu.unichristus.exception.CommonsException;
 import br.edu.unichristus.repository.UserRepository;
 import br.edu.unichristus.utils.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class UserService {
@@ -32,10 +36,29 @@ public class UserService {
     }
 
     public User findById(Long id){
+        var userEntity = repository.findById(id);
+        if (userEntity.isPresent()){
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.user.findById.notFound",
+                    "Usuário não encontrado!");
+        }
         return repository.findById(id).get();
     }
 
     public void deleteUser(Long id){
         repository.deleteById(id);
     }
+
+    public UserRolesDTO getRolesByUserId(Long id){
+        var userEntity = repository.findById(id);
+        if (userEntity.isPresent()){
+            throw new CommonsException(HttpStatus.NOT_FOUND,
+                    "unichristus.user.findById.notFound",
+                    "Usuário não encontrado!");
+        }
+        var userRolesDTO = MapperUtil.parseObject(userEntity, UserRolesDTO.class);
+        userRolesDTO.setRoles(new String[]{"MANAGER","ADMIN","COMMON"});
+        return userRolesDTO;
+    }
+
 }
