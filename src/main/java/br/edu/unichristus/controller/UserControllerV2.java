@@ -18,9 +18,9 @@ public class UserControllerV2 {
     @Autowired
     private UserService service;
 
-    @GetMapping("/{id}")
-    public UserRolesDTO getRolesByUserId(@PathVariable Long id){
-        return service.getRolesByUserId(id);
-    }
+//    @GetMapping("/{id}")
+//    public UserRolesDTO getRolesByUserId(@PathVariable Long id){
+//        return service.getRolesByUserId(id);
+//    }
 }
 
